@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sourcery</string>
+    <string name="title_activity_main">Sourcery</string>
+    <string name="package_name">org.sourcery</string>
+    <string name="custom_url_scheme">org.sourcery</string>
+</resources>

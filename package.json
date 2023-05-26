@@ -8,13 +8,16 @@
     "start": "nuxt start",
     "local": "concurrently \"firebase emulators:start --import=.emulator-data --export-on-exit\" \"EMULATOR=local nuxt\"",
     "generate": "nuxt generate",
-    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-pattern \"/android/\" --ignore-pattern \"/ios/\" .",
     "lint": "yarn lint:js",
     "lint:fix": "yarn lint:js --fix",
     "precommit": "yarn lint:js",
     "init": "npx husky install && .husky/post-checkout"
   },
   "dependencies": {
+    "@capacitor/android": "^5.0.4",
+    "@capacitor/core": "^5.0.4",
+    "@capacitor/ios": "^5.0.4",
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/firebase": "^7.3.0",
@@ -51,6 +54,7 @@
     "vue-instantsearch": "^2.7.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^5.0.4",
     "@nuxtjs/eslint-config": "^6.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/vuetify": "^1.11.3",
