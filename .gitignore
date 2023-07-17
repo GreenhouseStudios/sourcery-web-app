@@ -59,3 +59,6 @@ notes
 # Supabase
 **/supabase/.branches
 **/supabase/.temp
+
+# Yarn Cache
+.yarn

@@ -6,30 +6,29 @@
     <v-card
       v-if="request"
       :to="cardClickAction"
-      class="my-4 rounded-lg"
+      class="my-4 rounded-lg request-card"
       :color="cardColor"
     >
       <v-container>
-        <v-row>
+        <v-row class="row-flex">
           <v-col
             cols="auto"
             :class="labelClass"
             z-index="2"
           />
-          <v-col class="pa-0">
+          <v-col class="pa-0 content-col">
             <v-card-title v-if="!editing">
-              <span class="text-truncate" style="max-width: 200px;">{{ label }}</span>
+              <span class="text-truncate request-label" style="max-width: 300px;">{{ label }}</span>
             </v-card-title>
             <v-card-title v-else>
               <v-text-field v-model="editingLabelValue" class="edit-label" label="Edit Label" />
             </v-card-title>
             <v-card-subtitle>
               <span v-if="client">{{ request.repository.name }}</span>
-              <span v-else>
+              <div v-else>
                 <span v-if="requestUser && requestUser.name">{{ requestUser.name }}</span>
-                <span v-if="requestUser && !requestUser.name" class="text-truncate" style="max-width: 200px;">Submitted by {{ requestUser.email }}</span>
-              </span>
-              <br>
+                <span v-if="requestUser && !requestUser.name" class="text-truncate" style="max-width: 200px;display: block;">{{ requestUser.email }}</span>
+              </div>
               <span v-if="isSubmitted" class="font-italic font-weight-light">
                 Submitted {{ formatDate(request.created_at) }}
               </span>
@@ -51,7 +50,7 @@
               />
             </v-fade-transition>
           </v-col>
-          <v-col v-if="requestActionsList.length > 0" cols="auto" align-self="center" class="pr-0">
+          <v-col v-if="requestActionsList.length > 0" cols="auto" align-self="center" class="pr-0 mobile-friendly1">
             <v-menu offset-y>
               <template #activator="{ on: { click }, attrs }">
                 <v-btn
@@ -79,7 +78,7 @@
               </v-list>
             </v-menu>
           </v-col>
-          <v-col cols="auto" align-self="center" class="pr-0">
+          <v-col cols="auto" align-self="center" class="pr-4 mobile-friendly2">
             <v-btn
               fab
               dark
@@ -93,7 +92,6 @@
               </v-icon>
             </v-btn>
           </v-col>
-          <v-col cols="auto" />
         </v-row>
       </v-container>
     </v-card>
@@ -299,4 +297,53 @@ export default {
 .edit-label {
   z-index: 999;
 }
+
+.request-card {
+  height: 108px;
+
+  @media screen and (max-width: 380px) {
+    height: 130px;
+  }
+
+  @media screen and (max-width: 333px) {
+    height: 152px;
+  }
+
+  @media screen and (max-width: 300px) {
+    height: 174px;
+  }
+}
+
+.row-flex {
+  display: flex;
+  height: 100%;
+}
+
+.request-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content-col {
+
+  @media screen and (max-width: 480px) {
+    max-width: 185px;
+    overflow: hidden;
+  }
+}
+
+.mobile-friendly1 {
+  @media screen and (max-width: 400px) {
+    padding-left: 0px;
+  }
+}
+
+.mobile-friendly2 {
+  @media screen and (max-width: 400px) {
+    padding-right: 0px;
+    padding-left: 6px;
+  }
+}
+
 </style>

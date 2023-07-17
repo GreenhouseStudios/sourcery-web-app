@@ -21,9 +21,9 @@ export type CreateRequest = {
     archive_notes: string | null
     status?: Status
     repository?: Repository
-    request_clients?: RequestClient[]
+    request_clients?: RequestClient[] | RequestClient
     request_client?: RequestClient
-    request_vendors?: RequestVendor[]
+    request_vendors?: RequestVendor[] | RequestVendor
     request_vendor?: RequestVendor
     attachments?: Attachment[]
     user?: User
@@ -92,14 +92,23 @@ export class Request {
             this.repository = new Repository(repository)
         }
 
-        if (request_clients && request_clients.length > 0) {
-            this.request_client = new RequestClient(request_clients[0])
+        if (request_clients) {
+            if ( Array.isArray(request_clients) && request_clients.length > 0 ) {
+                this.request_client = new RequestClient(request_clients[0])
+            } else {
+                this.request_client = new RequestClient(request_clients as RequestClient)
+            }
         } else if (request_client) {
+            console.log('setting request client')
             this.request_client = new RequestClient(request_client)
         }
 
-        if (request_vendors && request_vendors.length > 0) {
-            this.request_vendor = new RequestVendor(request_vendors[0])
+        if (request_vendors) {
+            if ( Array.isArray(request_vendors) && request_vendors.length > 0 ) {
+                this.request_vendor = new RequestVendor(request_vendors[0])
+            } else {
+                this.request_vendor = new RequestVendor(request_vendors as RequestVendor)
+            }
         } else if (request_vendor) {
             this.request_vendor = new RequestVendor(request_vendor)
         }
@@ -156,6 +165,7 @@ export class Request {
         if (Array.isArray(requests)) {
             const rs = requests.map(x => new Request(x))
                 .filter(x => x.status)
+                console.log(rs)
             return rs
         }
 

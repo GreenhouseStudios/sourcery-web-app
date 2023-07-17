@@ -85,7 +85,7 @@
             <span v-if="inProgressRequests.length === 0">No requests in-progress.</span>
           </card-with-action>
           <card-with-action v-if="$vuetify.breakpoint.mobile" title="Completed" :number-requests="completedRequests.length" action="/requests?status=3,4">
-            <request-listing v-for="request in completedRequestsLimited" :key="`cjl-${request.id}`" :number-requests="completedRequests.length" :request="job" :client="true" />
+            <request-listing v-for="request in completedRequestsLimited" :key="`cjl-${request.id}`" :number-requests="completedRequests.length" :request="request" :client="true" />
             <span v-if="completedRequests.length === 0">No recently completed requests.</span>
           </card-with-action>
           <button-large :to="`/settings/feedback`" :text="`Report a Bug`" />
