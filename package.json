@@ -42,7 +42,7 @@
     "search-insights": "^1.4.0",
     "uuid": "^8.3.2",
     "vue-cookie-law": "^1.11.0",
-    "vue-instantsearch": "^2.7.0"
+    "vue-instantsearch": "^4.13.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
