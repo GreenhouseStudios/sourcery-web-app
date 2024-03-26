@@ -1,42 +1,34 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm8 xl6 offset-sm2 offset-xl3>
-      <h1
-        class="mb-4"
-      >
-        Organizations
-      </h1>
-
-      <v-card
-        outlined
-      >
-        <v-list v-if="organizations">
-          <template
-            v-for="(org, index) in organizations"
-          >
-            <organization-list-item :key="org.id" :organization="org" />
-            <v-divider v-if="index !== organizations.length - 1" :key="org.id + 'd'" class="my-2" />
-          </template>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+    <div id="page-organizations">
+        <v-container>
+            <v-row justify="center" align="center">
+                <v-col md="6">
+                    <h1 class="mb-6">Organizations</h1>
+                    <v-list>
+                        <v-list-item v-for="organization in organizations">
+                            <template v-slot:title>
+                                <div class="text-h6">{{ organization.name }}</div>
+                            </template>
+                            <template v-slot:subtitle>
+                                <div>{{ organization.address }}</div>
+                            </template>
+                            <template v-slot:append>
+                                <v-btn variant="text" color="primary" :to="`/o/${organization.id}`">View</v-btn>
+                            </template>
+                        </v-list-item>
+                    </v-list>
+                </v-col>
+            </v-row>
+        </v-container>
+    </div>
 </template>
 
-<script>
-import OrganizationListItem from '@/components/organization-list-item.vue'
-import { Organization } from '~/models/Organization'
+<script setup>
+definePageMeta({
+    middleware: ['admin']
+})
 
-export default {
-    name: 'Organizations',
-    components: {
-        OrganizationListItem
-    },
-    async asyncData () {
-        const organizations = await Organization.getAll()
-        return {
-            organizations
-        }
-    }
-}
+const { organizations, getOrganizations } = useOrganizations()
+
+await getOrganizations()
 </script>

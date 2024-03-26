@@ -2,7 +2,7 @@ import cookieParser from 'cookieparser'
 import jwt_decode from 'jwt-decode'
 import { formatMoney, unformat } from 'accounting-js'
 
-export default ({ app }, inject) => {
+export default defineNuxtPlugin(nuxtApp => {
     const utils = (() => {
         return {
             /**
@@ -127,6 +127,9 @@ export default ({ app }, inject) => {
         }
     })()
 
-    // Inject $utils() in Vue, context and store.
-    inject('utils', utils)
-}
+    return {
+        provide: {
+            utils
+        }
+    }
+})

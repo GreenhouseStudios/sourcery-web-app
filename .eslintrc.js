@@ -33,5 +33,5 @@ module.exports = {
         }],
         'vue/script-setup-uses-vars': 'off' // This is not in eslint anymore apparently and breaks IDE
     },
-    ignorePatterns: ['/tests/', '/static/', '**/*.ts'] // Disable these for now
+    ignorePatterns: ['/tests/', '/static/', '/public/', '**/*.ts'] // Disable these for now
 }

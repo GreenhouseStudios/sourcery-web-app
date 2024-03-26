@@ -1,31 +1,3 @@
 {
-    "compilerOptions": {
-        "target": "ES2018",
-        "module": "ESNext",
-        "moduleResolution": "node",
-        "lib": [
-            "ESNext",
-            "ESNext.AsyncIterable",
-            "DOM"
-        ],
-        "esModuleInterop": true,
-        "allowJs": true,
-        "sourceMap": true,
-        "strict": true,
-        "noEmit": false,
-        "baseUrl": ".",
-        "paths": {
-            "~/*": [
-                "./*"
-            ],
-            "@/*": [
-                "./*"
-            ]
-        }
-    },
-    "exclude": [
-        "node_modules",
-        "supabase/**"
-    ],
-    "include": ["node_modules/vuetify/types", "**/*"]
+    "extends": "./.nuxt/tsconfig.json"
 }

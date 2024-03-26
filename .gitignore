@@ -8,6 +8,9 @@ yarn-error.log
 # Nuxt build
 .nuxt
 
+# Built Nitro Folder
+.output
+
 # Nuxt generate
 dist
 

@@ -1,4 +1,4 @@
-alter table "public"."requests_prospective" add column "deleted" boolean default false;
+alter table "public"."requests_prospective" add column if not exists "deleted" boolean default false;
 
 set check_function_bodies = off;
 
@@ -32,7 +32,7 @@ $function$
 ;
 
 set check_function_bodies = on;
-
+DROP POLICY IF EXISTS "Allow authenticated users to insert" ON "public"."requests_prospective";
 create policy "Allow authenticated users to insert"
 on "public"."requests_prospective"
 as permissive
@@ -40,7 +40,7 @@ for insert
 to authenticated
 with check ((auth.role() = 'authenticated'::text));
 
-
+DROP POLICY IF EXISTS "Allow full access for admin" ON "public"."requests_prospective";
 create policy "Allow full access for admin"
 on "public"."requests_prospective"
 as permissive
@@ -50,7 +50,7 @@ using ((auth.uid() IN ( SELECT "user".id
    FROM "user"
   WHERE ("user".admin = true))));
 
-
+DROP POLICY IF EXISTS "Allow read for creator" ON "public"."requests_prospective";
 create policy "Allow read for creator"
 on "public"."requests_prospective"
 as permissive

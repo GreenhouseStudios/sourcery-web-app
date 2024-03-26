@@ -1,4 +1,4 @@
-export default ({ app }, inject) => {
+export default defineNuxtPlugin(nuxtApp => {
     const getJsonLdFile = (request) => {
         console.log(request)
         const jsonLd = {
@@ -57,5 +57,9 @@ export default ({ app }, inject) => {
         return jsonLd
     }
 
-    inject('getJsonLdFile', getJsonLdFile)
-}
+    return {
+        provide: {
+            getJsonLdFile
+        }
+    }
+})

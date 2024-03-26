@@ -50,20 +50,14 @@ function sortGroupedByProp (objs, prop) {
     return items
 }
 
-export default ({ app }, inject) => {
-    const sourcerySorts = (() => {
-        return {
-            sortByTimePropertyAsc,
-            sortByTimePropertyDesc,
-            sortGroupedByProp
+export default defineNuxtPlugin(nuxtApp => {
+    return {
+        provide: {
+            sourcerySorts: {
+                sortByTimePropertyAsc,
+                sortByTimePropertyDesc,
+                sortGroupedByProp
+            }
         }
-    })()
-
-    inject('sourcerySorts', sourcerySorts)
-}
-
-export {
-    sortByTimePropertyAsc,
-    sortByTimePropertyDesc,
-    sortGroupedByProp
-}
+    }
+})

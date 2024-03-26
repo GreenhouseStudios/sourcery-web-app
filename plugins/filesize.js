@@ -4,9 +4,14 @@
  */
 import filesize from 'filesize'
 
-export default ({ app }, inject) => {
-    // Inject $filesize() in Vue, context and store.
-    inject('filesize', size => filesize(size, {
-        base: 2
-    }))
-}
+export default defineNuxtPlugin(nuxtApp => {  
+    // You can alternatively use this format, which comes with automatic type support
+    return {
+        provide: {
+            filesize: size => filesize(size, {
+                base: 2
+            })
+        }
+    }
+})
+  
